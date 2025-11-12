@@ -3,14 +3,37 @@ spring:
     name: edufy-gateway
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
+      server:
+        webmvc:
+          routes:
+            - id: user-handling
+              uri: http://localhost:9595
+              predicates: Path=/api/v1/**
+              filters:
+                - TokenRelay=
+  jwt:
+    auth:
+      converter:
+        resource-id: edufy
+        principal-attribute: preferred_username
 
   security:
     oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/edufyrealm
+            authorization-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/token
+            user-info-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/certs
+        registration:
+          keycloak:
+            client-id: edufy
+            client-secret: aDxUzzlWwSfZluttXDx8HurdAF6oxz1z
+            authorization-grant-type: authorization_code
+            scope: openid, profile, email
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
 server:
-  port: 8081
+  port: 9090
