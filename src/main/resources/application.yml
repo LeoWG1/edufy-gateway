@@ -11,6 +11,11 @@ spring:
               predicates: Path=/api/v1/**
               filters:
                 - TokenRelay=
+            - id: media-player
+              uri: http://localhost:8084
+              predicates: Path=/api/v1/mediaplayer/**
+#              filters:
+#                - TokenRelay =
   jwt:
     auth:
       converter:
