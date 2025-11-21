@@ -8,14 +8,16 @@ spring:
           routes:
             - id: user-handling
               uri: http://localhost:9595
-              predicates: Path=/api/v1/**
+              predicates:
+                - Path=/api/v1/**
               filters:
                 - TokenRelay=
             - id: media-player
               uri: http://localhost:8084
-              predicates: Path=/api/v1/mediaplayer/**
-#              filters:
-#                - TokenRelay =
+              predicates:
+                - Path=/api/v1/mediaplayer/**
+              filters:
+                - TokenRelay=
   jwt:
     auth:
       converter:
@@ -39,6 +41,12 @@ spring:
             authorization-grant-type: authorization_code
             scope: openid, profile, email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+# change the name later on from localhost to eurekas containername
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 server:
   port: 9090
