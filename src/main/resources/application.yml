@@ -7,13 +7,13 @@ spring:
         webmvc:
           routes:
             - id: user-handling
-              uri: http://localhost:9595
+              uri: http://localhost:9595 #change later on to lb://microservice name matching eurekas registered name
               predicates:
                 - Path=/api/v1/**
               filters:
                 - TokenRelay=
             - id: media-player
-              uri: http://localhost:8084
+              uri: http://localhost:8084 #change later on to lb://microservice name matching eurekas registered name
               predicates:
                 - Path=/api/v1/mediaplayer/**
               filters:
