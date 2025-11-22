@@ -31,7 +31,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/actuator/**").permitAll()
                 .requestMatchers("/api/v1/admin/**").hasRole("edufy_ADMIN")
-                .anyRequest().authenticated()
+                    .anyRequest().authenticated()
             )
             .oauth2Login(oauth2 -> oauth2
                     .defaultSuccessUrl("/", true))
