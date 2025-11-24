@@ -46,7 +46,7 @@ public class SecurityConfig {
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withIssuerLocation("http://localhost:8080/realms/edufyrealm")
+        return NimbusJwtDecoder.withIssuerLocation("http://81.231.105.129:8084/realms/edufyrealm")
                 .build();
     }
 

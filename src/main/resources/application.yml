@@ -35,20 +35,21 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8080/realms/edufyrealm
-            authorization-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/auth
-            token-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/token
-            user-info-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/userinfo
-            jwk-set-uri: http://localhost:8080/realms/edufyrealm/protocol/openid-connect/certs
+            issuer-uri: http://81.231.105.129:8084/realms/edufyrealm
+            authorization-uri: http://81.231.105.129:8084/realms/edufyrealm/protocol/openid-connect/auth
+            token-uri: http://81.231.105.129:8084/realms/edufyrealm/protocol/openid-connect/token
+            user-info-uri: http://81.231.105.129:8084/realms/edufyrealm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://81.231.105.129:8084/realms/edufyrealm/protocol/openid-connect/certs
         registration:
           keycloak:
             client-id: edufy
-            client-secret: aDxUzzlWwSfZluttXDx8HurdAF6oxz1z
+            client-secret: DzyRVOzaiLftCsAJIzpbP3SZmrsaPD3x
             authorization-grant-type: authorization_code
             scope: openid, profile, email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
 
 # change the name later on from localhost to eurekas containername
+# Note from Leo: Will throw a TransportException if not also running the Eureka Server. Gateway still works.
 eureka:
   client:
     service-url:
