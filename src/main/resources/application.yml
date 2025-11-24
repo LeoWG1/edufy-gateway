@@ -7,8 +7,21 @@ spring:
         webmvc:
           routes:
             - id: user-handling
-              uri: http://localhost:9595
-              predicates: Path=/api/v1/**
+              uri: http://localhost:9595 #change later on to lb://microservice name matching eurekas registered name
+              predicates:
+                - Path=/api/v1/**
+              filters:
+                - TokenRelay=
+            - id: media-player
+              uri: http://localhost:8084 #change later on to lb://microservice name matching eurekas registered name
+              predicates:
+                - Path=/api/v1/mediaplayer/**
+              filters:
+                - TokenRelay=
+            - id: media-handling
+              uri: http://localhost:6767
+              predicates:
+                - Path=/api/v1/mediahandling/**
               filters:
                 - TokenRelay=
   jwt:
@@ -34,6 +47,12 @@ spring:
             authorization-grant-type: authorization_code
             scope: openid, profile, email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+# change the name later on from localhost to eurekas containername
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 
 server:
   port: 9090
