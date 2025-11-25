@@ -1,6 +1,7 @@
 spring:
   application:
     name: edufy-gateway
+
   cloud:
     gateway:
       server:
@@ -9,7 +10,7 @@ spring:
             - id: user-handling
               uri: http://localhost:9595 #change later on to lb://microservice name matching eurekas registered name
               predicates:
-                - Path=/api/v1/**
+                - Path=/api/v1/userhandling/**
               filters:
                 - TokenRelay=
             - id: media-player
