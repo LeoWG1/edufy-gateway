@@ -22,7 +22,13 @@ spring:
             - id: media-handling
               uri: http://localhost:6767
               predicates:
-                - Path=/api/v1/mediahandling/**
+                - Path=/api/v1/mediahandling/** #change later on to lb://microservice name matching eurekas registered name
+              filters:
+                - TokenRelay=
+            - id: recommendations
+              uri: http://localhost:8083 #change later on to lb://microservice name matching eurekas registered name
+              predicates:
+                - Path=/api/v1/recommendations/**
               filters:
                 - TokenRelay=
   jwt:
